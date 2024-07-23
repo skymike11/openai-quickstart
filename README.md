@@ -268,3 +268,200 @@ GPT:
 - **行业案例研究**：如金融领域的 BloombergGPT，大模型在金融和银行领域的应用场景与解决方案
 
 这就是对你今天课程学习内容的详细总结，希望对你有所帮助！
+
+
+
+## Day 2 作业
+
+### 作业内容 1：GPT-4V 的使用
+
+所需要识别的图片信息：
+
+![](./pic/pic-test.png)
+
+使用gpt-4 进行识别，并以markdown格式输出识别结果，并提供中英内容：
+
+```
+有人等烟雨，有人怪雨急，
+好像潮湿的雨水会流入心底，
+这场雨的暴雨能把城市敲击。
+
+Some people wait for the misty rain, some complain about the heavy rain,
+As if the moist rainwater could flow into their hearts,
+This heavy rain can pound the city.
+```
+
+
+
+### 作业内容 2： ai translator 的使用
+
+ai translator 的使用
+
+通过指令启动 ai-translator 的 python 项目，然后进行文本内容的翻译
+
+> python ai_translator/main.py --model_type OpenAIModel --openai_api_key $OPENAI_API_KEY --file_format markdown --book tests/test.pdf --target_lang chinese --openai_model gpt-3.5-turbo
+
+如果想配置程序更加灵活，可以新增target_lang 的启动参数
+
+1. argument_parse.py 文件新增解析参数
+
+```
+class ArgumentParser:
+    def __init__(self):
+		...
+        self.parser.add_argument('--target_lang', type=str)
+```
+
+2. 修改main.py，接受target_lang 参数
+
+   ```
+       targetLang = args.target_lang
+   ```
+
+3. 在python 指令启动是加入 --target_lang japanese
+
+
+
+**运行结果**
+
+```
+2024-07-23 14:55:40.669 | DEBUG    | translator.pdf_parser:parse_pdf:46 - [raw_text]
+ Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+2024-07-23 14:55:40.676 | DEBUG    | translator.pdf_parser:parse_pdf:54 - [table]
+[Fruit, Color, Price (USD)] [Apple, Red, 1.20] [Banana, Yellow, 0.50] [Orange, Orange, 0.80] [Strawberry, Red, 2.50] [Blueberry, Blue, 3.00] [Kiwi, Green, 1.00] [Mango, Orange, 1.50] [Grape, Purple, 2.00]
+2024-07-23 14:55:40.698 | DEBUG    | translator.pdf_translator:translate_pdf:19 - 翻译为日文：Test Data
+This dataset contains two test samples provided by ChatGPT, an AI language model by OpenAI.
+These samples include a markdown table and an English text passage, which can be used to test an
+English-to-Chinese translation software supporting both text and table formats.
+Text testing
+The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English
+alphabet at least once. Pangrams are often used to test fonts, keyboards, and other text-related
+tools. In addition to English, there are pangrams in many other languages. Some pangrams are more
+difficult to construct due to the unique characteristics of the language.
+Table Testing
+2024-07-23 14:55:52.275 | INFO     | translator.pdf_translator:translate_pdf:21 - テストデータ
+
+このデータセットには、OpenAIのAI言語モデルであるChatGPTが提供する2つのテストサンプルが含まれています。
+
+これらのサンプルには、マークダウンテーブルと英語のテキストのパッセージが含まれており、テキストと表の形式の両方をサポー トする英語から中国語への翻訳ソフトウェアのテストに使用することができます。
+
+テキストのテスト
+
+素早い茶色のキツネはのろまな犬を飛び越えます。このパングラムには、英語のアルファベットのすべての文字が少なくとも1回は含まれています。パングラムは、フォントやキーボード、その他のテキスト関連のツールをテストするためによく使用されます。英語 に加えて、多くの他の言語にもパングラムがあります。言語の独特な特徴により、一部のパングラムは構築がより難しいです。
+
+テーブルのテスト
+2024-07-23 14:55:52.279 | DEBUG    | translator.pdf_translator:translate_pdf:19 - 翻译为日文，以空格和换行符表示表格：
+[Fruit, Color, Price (USD)] [Apple, Red, 1.20] [Banana, Yellow, 0.50] [Orange, Orange, 0.80] [Strawberry, Red, 2.50] [Blueberry, Blue, 3.00] [Kiwi, Green, 1.00] [Mango, Orange, 1.50] [Grape, Purple, 2.00]
+2024-07-23 14:55:56.080 | INFO     | translator.pdf_translator:translate_pdf:21 - [果物, 色, 価格 (USD)]
+[リンゴ, 赤, 1.20]
+[バナナ, 黄色, 0.50]
+[オレンジ, オレンジ, 0.80]
+[イチゴ, 赤, 2.50]
+[ブルーベリー, 青, 3.00]
+[キウイ, 緑, 1.00]
+[マンゴー, オレンジ, 1.50]
+[ブドウ, 紫, 2.00]
+2024-07-23 14:55:56.081 | DEBUG    | book.content:set_translation:49 - [果物, 色, 価格 (USD)]
+[リンゴ, 赤, 1.20]
+[バナナ, 黄色, 0.50]
+[オレンジ, オレンジ, 0.80]
+[イチゴ, 赤, 2.50]
+[ブルーベリー, 青, 3.00]
+[キウイ, 緑, 1.00]
+[マンゴー, オレンジ, 1.50]
+[ブドウ, 紫, 2.00]
+2024-07-23 14:55:56.081 | DEBUG    | book.content:set_translation:52 - [['[果物,', '色,', '価格', '(USD)]'], ['[リンゴ,', '赤,', '1.20]'], ['[バナナ,', '黄色,', '0.50]'], ['[オレンジ,', 'オレンジ,', '0.80]'], ['[イチゴ,', '赤,', '2.50]'], ['[ブルーベリー,', '青,', '3.00]'], ['[キウイ,', '緑,', '1.00]'], ['[マンゴー,', 'オレンジ,', '1.50]'], ['[ブドウ,', '紫,', '2.00]']]
+```
+
+
+
+### 作业内容3：扩展 langchain chains
+
+1. 修改langchain prompt template 提示词模板，新增多个不同的老师提示词。
+
+   ```
+   physics_template = """你是一位非常聪明的物理教授。
+   你擅长以简洁易懂的方式回答关于物理的问题。
+   当你不知道某个问题的答案时，你会坦诚承认。
+   
+   这是一个问题：
+   {input}"""
+   
+   
+   math_template = """你是一位很棒的数学家。你擅长回答数学问题。
+   之所以如此出色，是因为你能够将难题分解成各个组成部分，
+   先回答这些组成部分，然后再将它们整合起来回答更广泛的问题。
+   
+   
+   这是一个问题：
+   {input}"""
+   
+   biologic_template = """你是一位非常聪明的生物学教授。
+   你擅长用简单明了的语言回答关于生物学的问题。
+   你喜欢通过举例和类比来解释复杂的生物学概念。
+   
+   
+   这是一个问题：
+   {input}"""
+   
+   
+   cs_template = """你是一位非常有才华的计算机科学教授。
+   你擅长用简单易懂的方式解释复杂的计算机科学概念。
+   当你解释问题时，你会结合实际应用和例子，使概念更加具体和易懂。
+   
+   
+   这是一个问题：
+   {input}"""
+   ```
+
+   
+
+2. 配置好 prompt_info 的映射关系
+
+   ```
+   prompt_infos = [
+       {
+           "name": "物理",
+           "description": "适用于回答物理问题",
+           "prompt_template": physics_template,
+       },
+       {
+           "name": "数学",
+           "description": "适用于回答数学问题",
+           "prompt_template": math_template,
+       },
+       {
+           "name": "生物",
+           "description": "适用于回答生物问题",
+           "prompt_template": biologic_template,
+       },    
+       {
+           "name": "计算机",
+           "description": "适用于回答计算机问题",
+           "prompt_template": cs_template,
+       },        
+   ]
+   ```
+
+3. 结果输出
+
+   ```
+   物理: 适用于回答物理问题
+   数学: 适用于回答数学问题
+   生物: 适用于回答生物问题
+   计算机: 适用于回答计算机问题
+   ```
+
+   
+
+4. 
+
